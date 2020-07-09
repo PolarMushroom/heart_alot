@@ -6,21 +6,20 @@ function Detail(props) {
   const {
     set_global_lang,
     set_global_language,
+    global_action_loading,
     lang,
     language
   } = props;
 
   // console.log(lang);
 
-  const change_language = async () => {
-    if (lang === 'kr') {
-      await set_global_lang('en');
-      await set_global_language();
-    } else {
-      await set_global_lang('kr');
-      await set_global_language();
+  const change_language = () => {
+    global_action_loading()
+    // console.log(props);
+    setTimeout(() => {
+      global_action_loading(false)
+    }, 5000)
 
-    }
 
   }
 
@@ -35,4 +34,4 @@ function Detail(props) {
 
 
 
-export default connect(state => ({ ...state.language }), { ...action.language })(Detail);
+export default connect(state => ({ ...state.language }), { ...action.globalLoading, ...action.language, })(Detail);

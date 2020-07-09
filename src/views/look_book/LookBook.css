@@ -3,14 +3,14 @@ html {
   margin: 0;
   padding: 0;
   position: relative;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory;
   overflow-y: scroll;
   scroll-snap-points-y: repeat(100vh);
-  scroll-behavior: smooth;
-  /* scroll-snap-type: mandatory; */
-
-  /* scroll-snap-stop: always; */
+  scroll-behavior: smooth; */
 }
+/* scroll-snap-type: mandatory; */
+
+/* scroll-snap-stop: always; */
 
 /* .container {
 } */
@@ -19,7 +19,7 @@ section {
   border-bottom: 1px solid white;
   padding: 1rem;
   height: 100vh;
-  scroll-snap-align: start;
+  /* scroll-snap-align: end; */
   text-align: center;
   position: relative;
   padding: 0;
@@ -34,7 +34,7 @@ section {
   justify-content: center;
   align-items: center;
 } */
-/* .child {
+.child {
   position: absolute;
   text-align: center;
   color: white;
@@ -42,27 +42,73 @@ section {
   margin: 0;
   height: 100vh;
   font-size: calc(1rem + 3vw);
-} */
-.child {
-  position: absolute;
-  /* top: %; */
-  /* transform: translateY(-50%); */
-  text-align: center;
-  color: white;
-  width: 100%;
-  left: 0;
-  font-size: calc(1rem + 3vw);
 }
 
-.child:nth-child(1) {
+#one {
   background-color: blueviolet;
   text-align: center;
 }
 
-.child:nth-child(2) {
+#two {
   background-color: chocolate;
 }
 
-.child:nth-child(3) {
+#three {
   background-color: palegreen;
 }
+
+#four {
+  background-color: yellow;
+}
+
+#five {
+  background-color: black;
+}
+
+/* html {
+  background: #f2f2f2;
+}
+
+.scroll-container {
+  width: 100%;
+  height: 100vh;
+}
+.scroll-area {
+  width: 100%;
+  height: 100vh;
+  font-size: 60px;
+}
+
+.scroll-container {
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.scroll-container,
+.scroll-area {
+  margin: 0 auto;
+}
+
+.scroll-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  scroll-snap-align: start;
+}
+
+.scroll-area:nth-of-type(1) {
+  background: #49b293;
+}
+
+.scroll-area:nth-of-type(2) {
+  background: #c94e4b;
+}
+
+.scroll-area:nth-of-type(3) {
+  background: #4cc1be;
+}
+
+.scroll-area:nth-of-type(4) {
+  background: #8360a6;
+} */

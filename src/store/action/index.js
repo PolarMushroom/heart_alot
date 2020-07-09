@@ -1,5 +1,5 @@
 import language from './language';
-
-const reduxAction = { language };
+import globalLoading from './globalLoading';
+const reduxAction = { language, globalLoading };
 
 export default reduxAction;
