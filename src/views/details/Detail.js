@@ -4,10 +4,9 @@ import action from '../../store/action/index'
 
 function Detail(props) {
   const {
-    set_global_lang,
-    set_global_language,
+
     global_action_loading,
-    lang,
+
     language
   } = props;
 
