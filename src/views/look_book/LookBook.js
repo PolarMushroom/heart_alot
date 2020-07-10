@@ -12,7 +12,6 @@ function LookBook() {
     const sectionList = ['onee', 'twoo', 'threee', 'fourr', 'fivee']
     const [sectionIndex, setSectionIndex] = useState(0);
     var scroll = Scroll.animateScroll;
-    let qwerty = 0
     let ticket = false;
     let index = 0;
 
@@ -39,15 +38,9 @@ function LookBook() {
 
     // }, 4000);
     var lastScrollTop = window.pageYOffset;
-    const scrollqq = () => {
-        scroller.scrollTo(sectionList[index], {
-            duration: 1500,
-            delay: 100,
-            smooth: true,
-        })
-    }
 
-    function test() {
+
+    function scrollTo() {
         // let element = document.getElementById("dddd");
 
         // console.log(element);
@@ -59,7 +52,11 @@ function LookBook() {
             console.log("begin", to, element);
         });
 
-        scrollqq()
+        scroller.scrollTo(sectionList[index], {
+            duration: 1500,
+            delay: 100,
+            smooth: true,
+        })
         Events.scrollEvent.register('end', function (to, element) {
             console.log("end", to, element);
         });
@@ -72,12 +69,8 @@ function LookBook() {
     // }, [sectionIndex])
 
     setTimeout(() => {
-
-        // element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
-        window.addEventListener("scroll", function () { // or window.addEventListener("scroll"....
+        window.addEventListener("scroll", function () {
             var st = window.pageYOffset || document.documentElement.scrollTop;
-            // console.log(document.documentElement.scrollTop);
-
             if (!ticket) {
                 ticket = true;
                 if (st > lastScrollTop) {
@@ -86,7 +79,7 @@ function LookBook() {
 
                     if (index < 5) {
                         index++
-                        test()
+                        scrollTo()
                     }
                     console.log(index);
 
@@ -100,7 +93,7 @@ function LookBook() {
                     ticket = true;
                     if (index > 0) {
                         index--
-                        test()
+                        scrollTo()
                     }
                     console.log(index);
                     setTimeout(() => {
@@ -109,8 +102,7 @@ function LookBook() {
                     }, 2000);
                 }
             }
-            // test()
-            lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+            lastScrollTop = st <= 0 ? 0 : st;
         }, false);
     }, 1000);
 
@@ -154,7 +146,7 @@ function LookBook() {
 
     return (
         <div>
-            <button onClick={test}>sdsada</button>
+            <button onClick={scrollTo}>test</button>
             <Link activeClass="onClick"
                 to="one"
                 spy={true}
