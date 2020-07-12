@@ -1,39 +1,48 @@
 header {
-  position: sticky;
+  position: fixed;
+
   display: flex;
-  background-color: #f7bfcc;
+  /* background-color: #f7bfcc; */
   top: 0px;
   left: 0px;
   margin: 0;
   padding: 0;
-  height: 145px;
+  height: calc(80px + 4vw);
+  width: 100vw;
   flex-direction: column;
-  font-family: 'Noto Sans';
+  /* font-family: 'Noto Sans'; */
   /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
   filter: brightness(90%);
+  z-index: 999;
 }
 
 .menu_button {
   background: none;
   border: none;
   outline: none;
-  font-size: 20px;
+  font-size: calc(10px + 2vw);
 }
 
 .language_selector {
+  position: absolute;
   display: flex;
-  width: 10%;
+  width: 90%;
+  justify-content: flex-end;
+  margin-top: 1%;
 }
 
 .header_logo_container {
+  /* position: absolute; */
   width: 100%;
   display: flex;
-  margin-left: 10%;
+  /* margin-left: 10%; */
   justify-content: center;
 }
 .header_logo {
   display: flex;
   justify-content: center;
+  width: calc(200px + 40vw);
+  height: calc((200px + 10vw) / 3);
   max-width: 600px;
 }
 
@@ -59,7 +68,7 @@ ul {
 
 .menu_container {
   width: 70%;
-  height: 40px;
+  height: calc(80px + 5vw);
   justify-content: space-around;
   padding: 0px;
 }

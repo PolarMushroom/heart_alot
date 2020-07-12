@@ -1,260 +1,106 @@
-// import React, { useEffect, useState } from 'react';
+// import React from 'react';
 // import './LookBook.css'
-// import { Link, Element, Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 // function LookBook() {
 
 
-//     var Scroll = require('react-scroll');
-//     var Element = Scroll.Element;
-//     var scroller = Scroll.scroller;
+//     var lastScrollTop = 0;
+//     var stopLocation = 0;
+//     function scrollTo(index) {
+//         window.scrollTo({
+//             top: window.innerHeight * index,
+//             left: 0,
+//             offset: '',
+//             behavior: 'smooth'
+//         });
 
-//     const sectionList = ['onee', 'twoo', 'threee', 'fourr', 'fivee']
-//     const [sectionIndex, setSectionIndex] = useState(0);
-//     var scroll = Scroll.animateScroll;
-
-//     let index = 0;
-
-//     // let last_known_scroll_position = window.scrollY;
-//     // function doSomething(position) {
-//     //     // scroll 위치에 대한 작업을 하세요
-//     //     const height = window.innerHeight * 3;
-//     //     // console.log(position);
-
-//     //     if (position > window.scrollY) {
-//     //         // console.log('Scroll up');
-//     //         console.log('Scroll up', position, window.scrollY);
-//     //         last_known_scroll_position = window.scrollY;
-//     //     }
-//     //     else if (position < window.scrollY) {
-//     //         console.log('Scroll down', position, window.scrollY);
-//     //         last_known_scroll_position = window.scrollY;
-//     //     }
-
-//     // }
-
-//     // setTimeout(() => {
-//     //     console.log("timeout");
-
-//     // }, 4000);
-//     var lastScrollTop = window.pageYOffset;
-//     // useEffect(() => {
-//     //     scrollTo()
-//     // }, [index])
-
-//     function scrollTo(up_down) {
-//         if (up_down === "up") {
-//             if (index > 0) {
-//                 index--
-
-//             }
-//         } else {
-//             index++
-//         }
-
-//         let element = document.getElementById('three');
-//         // element.scrollIntoView({ duration: "1500", behavior: "smooth", block: "end", inline: "nearest" });
-//         element.scrollIntoView({ behavior: "smooth", block: "end" });
-
-//         // window.scrollTo({ 0,, behavior: 'smooth' });
-
-//         // window.scrollTo({
-//         //     top: window.innerHeight * 2,
-//         //     // bottom:  window.innerHeight * 2,
-//         //     behavior: 'smooth'
-//         // });
-//         // console.log(element);
-//         // element.scrollIntoView()
-//         // scroll.scrollToBottom();
-//         // console.log("sectionIndex2", sectionIndex2);
-
-//         // Events.scrollEvent.register('begin', function (to, element) {
-//         //     console.log("begin", to, element);
-//         // });
-
-//         // scroll.scrollTo(window.innerHeight * index);
-//         // scroller.scrollTo(sectionList[index], {
-//         //     duration: 1500,
-//         //     delay: 100,
-//         //     smooth: true,
-//         // })
-//         // Events.scrollEvent.register('end', function (to, element) {
-//         //     console.log("end", to, element);
-//         // });
-//         // sectionIndex++
-//     }
-
-//     // useEffect(() => {
-//     //     console.log(sectionIndex);
-
-//     // }, [sectionIndex])
-
-//     const sayHello = () => {
-//         console.log(index);
+//         lastScrollTop = window.pageYOffset
 
 //     }
-//     let ticket = false;
-//     setTimeout(() => {
-//         window.addEventListener("scroll", function () {
-//             var st = window.pageYOffset || document.documentElement.scrollTop;
 
+//     var ticking = false;
+
+
+//     const stopScroll = (() => {
+//         window.scrollTo(0, stopLocation * window.innerHeight);
+//     })
+
+
+//     const scrolling = () => {
+//         var st = window.pageYOffset || document.documentElement.scrollTop;
+
+//         if (!ticking) {
+//             ticking = true;
 //             if (st > lastScrollTop) {
+
 //                 // downscroll code
+//                 console.log("down");
 
-
-//                 if (!ticket) {
-//                     console.log('Scroll down');
-//                     ticket = true;
-//                     scrollTo("down")
-//                     setTimeout(() => {
-
-//                         ticket = false;
-//                     }, 1000)
+//                 if (stopLocation < 4) {
+//                     stopLocation++
 //                 }
-//                 // console.log(index);
+//                 window.requestAnimationFrame(function () {
+//                     scrollTo(stopLocation);
+//                 })
 
-
-
-//                 setTimeout(() => {
-//                     ticket = false
-//                 }, 1000);
 //             } else {
 //                 // upscroll code
-
-//                 if (!ticket) {
-//                     ticket = true;
-//                     console.log(ticket);
-//                     scrollTo("up")
-//                     setTimeout(() => {
-
-//                         ticket = false;
-//                     }, 1000)
+//                 console.log("up");
+//                 if (stopLocation > 0) {
+//                     stopLocation--
 //                 }
-//                 // setTimeout(() => {
-//                 //     ticket = false;
-//                 // }, 1000);
+//                 window.requestAnimationFrame(function () {
+//                     scrollTo(stopLocation);
+//                 });
 //             }
 //             lastScrollTop = st <= 0 ? 0 : st;
-//         }, false);
-//     }, 1000);
+//             setTimeout(() => {
 
+//                 window.addEventListener("scroll", stopScroll)
+//                 setTimeout(() => {
+//                     ticking = false
+//                     lastScrollTop = window.pageYOffset;
+//                     window.removeEventListener("scroll", stopScroll, false);
+//                 }, 800)
 
-//     // 
+//             }, 500)
+//         }
 
-//     // window.addEventListener('scroll', function (e) {
+//     }
 
-
-//     //     if (!ticket) {
-//     //         window.requestAnimationFrame(function () {
-//     //             doSomething(last_known_scroll_position);
-//     //             ticket = true;
-//     //             setTimeout(() => {
-//     //                 console.log("timeout");
-//     //                 ticket = false;
-//     //             }, 4000);
-//     //         });
-
-
-//     //     }
-//     // });
-
-//     // window.addEventListener('mousewheel', async (event) => {
-//     //     if (!ticket) {
-//     //         ticket = true;
-//     //         setTimeout(() => {
-//     //             ticket = false;
-//     //         }, 500)
-
-//     //     }
-//     // });
-
-
-//     // add listener to disable scroll
-//     // window.addEventListener('scroll', noScroll);
-
-//     // Remove listener to re-enable scroll
-//     // window.removeEventListener('scroll', noScroll);
-
+//     window.addEventListener("scroll", scrolling, false);
 
 //     return (
 //         <div>
-//             <button onClick={scrollTo}>test</button>
-//             <Link activeClass="onClick"
-//                 to="one"
-//                 spy={true}
-//                 smooth={true}
-//                 hashSpy={true}
-//                 offset={0}
-//                 duration={500}
-//                 className="nav_text a"
-//             >
-//                 <span className="text">HOME</span>
-//             </Link>
-//             <Link activeClass="onClick"
-//                 to="two"
-//                 spy={true}
-//                 smooth={true}
-//                 hashSpy={true}
-//                 offset={0}
-//                 duration={500}
-//                 className="nav_text a"
-//             >
-//                 <span className="text">HOME</span>
-//             </Link>
-//             <Link activeClass="onClick"
-//                 to="three"
-//                 spy={true}
-//                 smooth={true}
-//                 hashSpy={true}
-//                 offset={0}
-//                 duration={500}
-//                 className="nav_text a"
-//             >
-//                 <span className="text">HOME</span>
-//             </Link>
 //             <section className="container">
-//                 {/* <Element className="child" id="one" name="onee">1</Element> */}
-//                 <div className="child" id="one" >1</div>
+//                 <div className="child" id="one" ></div>
 
 //             </section>
 //             <section className="container">
-//                 {/* <Element className="child" id="two" name="twoo">2</Element> */}
-//                 <div className="child" id="two" >2</div>
+//                 <div className="child" id="two" ></div>
 
 //             </section>
 //             <section className="container">
-//                 {/* <Element className="child" id="three" name="threee">3</Element> */}
-//                 <div className="child" id="three">3</div>
+//                 <div className="child" id="three"></div>
 //             </section>
 //             <section className="container">
-//                 {/* <Element className="child" id="four" name="fourr">4</Element> */}
-//                 <div className="child" id="four" >4</div>
+//                 <div className="child" id="four" ></div>
 
 //             </section>
 //             <section className="container">
-//                 {/* <Element className="child" id="five" name="fivee">5</Element> */}
-//                 <div className="child" id="five" >5</div>
+//                 <div className="child" id="five" ></div>
 
 //             </section>
-//             {/* <Element className="child" id="five" name="fivee">5</Element> */}
 //         </div>
-//         // <div class="scrolled-container">
-//         //     <div class="scrolled-area">1</div>
-//         //     <div class="scrolled-area">2</div>
-//         //     <div class="scrolled-area">3</div>
-//         //     <div class="scrolled-area">4</div>
-//         // </div>
+
 //     );
 // }
 
 // export default LookBook;
 
-
-
-
 import React, { Component } from 'react'
 import Fullpage, { FullPageSections, FullpageSection } from '@ap.cx/react-fullpage'
-
+import './LookBook.css'
 export default class LookBook extends Component {
     render() {
         return (
@@ -263,20 +109,24 @@ export default class LookBook extends Component {
                 <FullPageSections>
 
                     <FullpageSection style={{
-                        backgroundColor: 'lime',
+                        // backgroundColor: 'lime',
                         height: '100vh',
-                        padding: '1em',
-                    }}>1</FullpageSection>
+                        // padding: '1em',
+                        // backgroundImage: 'https://www.nzherald.co.nz/resizer/F-AnpPpgzz5PuUMlKmBdvxEzq4Y=/1000x562/smart/filters:quality(70)/arc-anglerfish-syd-prod-nzme.s3.amazonaws.com/public/LW42KJ2PQFFMLDPUWC5OVUTG5U.jpg'
+                    }}><div className="child" id="one" ></div> </FullpageSection>
                     <FullpageSection style={{
-                        backgroundColor: 'coral',
+                        // backgroundColor: 'coral',
                         height: '100vh',
-                        padding: '1em',
-                    }}>2</FullpageSection>
+                    }}><div className="child" id="two" ></div></FullpageSection>
                     <FullpageSection style={{
-                        backgroundColor: 'firebrick',
                         height: '100vh',
-                        padding: '1em',
-                    }}>3</FullpageSection>
+                    }}><div className="child" id="three" ></div></FullpageSection>
+                    <FullpageSection style={{
+                        height: '100vh',
+                    }}><div className="child" id="four" ></div></FullpageSection>
+                    <FullpageSection style={{
+                        height: '100vh',
+                    }}><div className="child" id="five" ></div></FullpageSection>
 
                 </FullPageSections>
 

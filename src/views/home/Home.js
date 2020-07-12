@@ -5,13 +5,13 @@ function Home() {
     return (
         <div>
             <img src="/images/sinoon01.jpg" alt="background" width="100%" />
-            <div class="products_container">
-                <div class="products" alt="background" />
-                <img class="products" src="/images/test1.jpg" alt="background" width="100%" />
-                <img class="products" src="/images/test1.jpg" alt="background" width="100%" />
-                <img class="products" src="/images/test1.jpg" alt="background" width="100%" />
-                <img class="products" src="/images/test1.jpg" alt="background" width="100%" />
-                <img class="products" src="/images/test1.jpg" alt="background" width="100%" />
+            <div className="products_container">
+                <div className="products" alt="background" />
+                <div className="products" alt="background" />
+                <div className="products" alt="background" />
+                <div className="products" alt="background" />
+                <div className="products" alt="background" />
+                <div className="products" alt="background" />
             </div>
         </div>
     );
