@@ -1,102 +1,102 @@
-import React from 'react';
-import './LookBook.css'
+// import React from 'react';
+// import './LookBook.css'
 
-function LookBook() {
-
-
-    var lastScrollTop = 0;
-    var stopLocation = 0;
-    function scrollTo(index) {
-        window.scrollTo({
-            top: window.innerHeight * index,
-            left: 0,
-            offset: '',
-            behavior: 'smooth'
-        });
-
-        lastScrollTop = window.pageYOffset
-
-    }
-
-    var ticking = false;
+// function LookBook() {
 
 
-    const stopScroll = (() => {
-        window.scrollTo(0, stopLocation * window.innerHeight);
-    })
+//     var lastScrollTop = 0;
+//     var stopLocation = 0;
+//     function scrollTo(index) {
+//         window.scrollTo({
+//             top: window.innerHeight * index,
+//             left: 0,
+//             offset: '',
+//             behavior: 'smooth'
+//         });
+
+//         lastScrollTop = window.pageYOffset
+
+//     }
+
+//     var ticking = false;
 
 
-    const scrolling = () => {
-        var st = window.pageYOffset || document.documentElement.scrollTop;
+//     const stopScroll = (() => {
+//         window.scrollTo(0, stopLocation * window.innerHeight);
+//     })
 
-        if (!ticking) {
-            ticking = true;
-            if (st > lastScrollTop) {
 
-                // downscroll code
-                console.log("down");
+//     const scrolling = () => {
+//         var st = window.pageYOffset || document.documentElement.scrollTop;
 
-                if (stopLocation < 4) {
-                    stopLocation++
-                }
-                window.requestAnimationFrame(function () {
-                    scrollTo(stopLocation);
-                })
+//         if (!ticking) {
+//             ticking = true;
+//             if (st > lastScrollTop) {
 
-            } else {
-                // upscroll code
-                console.log("up");
-                if (stopLocation > 0) {
-                    stopLocation--
-                }
-                window.requestAnimationFrame(function () {
-                    scrollTo(stopLocation);
-                });
-            }
-            lastScrollTop = st <= 0 ? 0 : st;
-            setTimeout(() => {
+//                 // downscroll code
+//                 console.log("down");
 
-                window.addEventListener("scroll", stopScroll)
-                setTimeout(() => {
-                    ticking = false
-                    lastScrollTop = window.pageYOffset;
-                    window.removeEventListener("scroll", stopScroll, false);
-                }, 800)
+//                 if (stopLocation < 4) {
+//                     stopLocation++
+//                 }
+//                 window.requestAnimationFrame(function () {
+//                     scrollTo(stopLocation);
+//                 })
 
-            }, 500)
-        }
+//             } else {
+//                 // upscroll code
+//                 console.log("up");
+//                 if (stopLocation > 0) {
+//                     stopLocation--
+//                 }
+//                 window.requestAnimationFrame(function () {
+//                     scrollTo(stopLocation);
+//                 });
+//             }
+//             lastScrollTop = st <= 0 ? 0 : st;
+//             setTimeout(() => {
 
-    }
+//                 window.addEventListener("scroll", stopScroll)
+//                 setTimeout(() => {
+//                     ticking = false
+//                     lastScrollTop = window.pageYOffset;
+//                     window.removeEventListener("scroll", stopScroll, false);
+//                 }, 800)
 
-    window.addEventListener("scroll", scrolling, false);
+//             }, 500)
+//         }
 
-    return (
-        <div>
-            <section className="container">
-                <div className="child" id="one" ></div>
+//     }
 
-            </section>
-            <section className="container">
-                <div className="child" id="two" ></div>
+//     window.addEventListener("scroll", scrolling, false);
 
-            </section>
-            <section className="container">
-                <div className="child" id="three"></div>
-            </section>
-            <section className="container">
-                <div className="child" id="four" ></div>
+//     return (
+//         <div>
+//             <section className="container">
+//                 <div className="child" id="one" ></div>
 
-            </section>
-            <section className="container">
-                <div className="child" id="five" ></div>
+//             </section>
+//             <section className="container">
+//                 <div className="child" id="two" ></div>
 
-            </section>
-        </div>
+//             </section>
+//             <section className="container">
+//                 <div className="child" id="three"></div>
+//             </section>
+//             <section className="container">
+//                 <div className="child" id="four" ></div>
 
-    );
-}
+//             </section>
+//             <section className="container">
+//                 <div className="child" id="five" ></div>
 
-export default LookBook;
+//             </section>
+//         </div>
+
+//     );
+// }
+
+// export default LookBook;
 
 // import React, { Component } from 'react'
 // import Fullpage, { FullPageSections, FullpageSection } from '@ap.cx/react-fullpage'
@@ -130,3 +130,36 @@ export default LookBook;
 //         )
 //     }
 // }
+
+
+
+import React from 'react';
+import { SectionsContainer, Section } from 'react-fullpage';
+
+import './LookBook.css'
+
+function LookBook() {
+    let options = {
+        sectionClassName: 'container',
+        anchors: ['sectionOne', 'sectionTwo', 'sectionThree', 'sectionFour', 'sectionFive'],
+        scrollBar: false,
+        navigation: true,
+        verticalAlign: false,
+        sectionPaddingTop: '0px',
+        sectionPaddingBottom: '0px',
+        arrowNavigation: true
+    };
+    return (
+        <>
+            <SectionsContainer {...options}>
+                <Section className="container" href="#sectionOne"><div className="child" id="one" ></div></Section>
+                <Section className="container" href="#sectionTwo"><div className="child" id="two" ></div></Section>
+                <Section className="container" href="#sectionThree"><div className="child" id="three" ></div></Section>
+                <Section className="container" href="#sectionFour"><div className="child" id="four" ></div></Section>
+                <Section className="container" href="#sectionFive"><div className="child" id="five" ></div></Section>
+            </SectionsContainer>
+        </>
+    );
+}
+
+export default LookBook;
